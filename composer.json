@@ -1,0 +1,16 @@
+{
+    "name": "theodo/send-grid-mailer-bundle",
+    "description": "An opensource bundle that integrates SendGrid API to send emails via their mailing service",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Reynald Mandel",
+            "email": "reynaldm@theodo.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "~2.1"
+    }
+}
