@@ -10,8 +10,8 @@
 
     <services>
         <service id="theodo_send_grid_mailer.mailer" class="%theodo_send_grid_mailer.mailer.class%">
-            <argument>"%sendgrid.user_login%"</argument>
-            <argument>"%sendgrid.user_password%"</argument>
+            <argument>%sendgrid.user_login%</argument>
+            <argument>%sendgrid.user_password%</argument>
         </service>
     </services>
 
