@@ -33,6 +33,7 @@ How to use it ?
 
 Sending mail is easy :
  - define "sendgrid.user_login" and "sendgrid.user_password" in your parameters.yml
- - create your SendGrid/Email manually (todo by the end of the week : a SendGridEmailFactory)
  - get the "theodo_send_grid_mailer.mailer" service and use the "sendEmail" function
  - enjoy
+
+Note that you also have a SendGridEmailFactory available.

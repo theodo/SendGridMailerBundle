@@ -6,13 +6,20 @@
 
     <parameters>
         <parameter key="theodo_send_grid_mailer.mailer.class">Theodo\SendGridMailerBundle\Mailer\SendGridMailer</parameter>
+        <parameter key="theodo_send_grid_mailer.factory.class">Theodo\SendGridMailerBundle\Factory\SendGridEmailFactory</parameter>
     </parameters>
 
     <services>
+
+        <service id="theodo_send_grid_mailer.factory" class="%theodo_send_grid_mailer.factory.class%">
+        </service>
+
         <service id="theodo_send_grid_mailer.mailer" class="%theodo_send_grid_mailer.mailer.class%">
             <argument>%sendgrid.user_login%</argument>
             <argument>%sendgrid.user_password%</argument>
+            <argument type="service" id="theodo_send_grid_mailer.factory" />
         </service>
+
     </services>
 
 </container>
