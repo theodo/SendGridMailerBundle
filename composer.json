@@ -19,7 +19,7 @@
         "php": ">=5.3.2",
         "symfony/framework-bundle": "~2.1",
         "symfony/options-resolver": "~2.1",
-        "theodo/sendgrid": "dev-master"
+        "theodo/sendgrid": "dev-master@dev"
     },
     "autoload": {
         "psr-0": { "Theodo\\SendGridMailerBundle": "" }
