@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4a2404826d3bd203e91719a9dbb2a2ff",
+    "hash": "78a92e95fc49ac319ee96864586f9b50",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -225,52 +225,6 @@
                 "psr-3"
             ],
             "time": "2014-01-18 15:33:09"
-        },
-        {
-            "name": "sendgrid/sendgrid",
-            "version": "2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sendgrid/sendgrid-php.git",
-                "reference": "8df4e3b3cd5952dd4255ddd0ecdcd5bd9e59ed4a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/8df4e3b3cd5952dd4255ddd0ecdcd5bd9e59ed4a",
-                "reference": "8df4e3b3cd5952dd4255ddd0ecdcd5bd9e59ed4a",
-                "shasum": ""
-            },
-            "require": {
-                "mashape/unirest-php": "dev-master",
-                "php": ">=5.3",
-                "sendgrid/smtpapi": "0.0.1"
-            },
-            "replace": {
-                "sendgrid/sendgrid-php": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*",
-                "vlucas/phpdotenv": "1.0.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "SendGrid": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "This library allows you to quickly and easily send emails through SendGrid using PHP.",
-            "homepage": "http://github.com/sendgrid/sendgrid-php",
-            "keywords": [
-                "email",
-                "grid",
-                "send",
-                "sendgrid"
-            ],
-            "time": "2014-02-22 20:28:18"
         },
         {
             "name": "sendgrid/smtpapi",
@@ -1196,6 +1150,54 @@
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
             "time": "2014-02-03 17:15:42"
+        },
+        {
+            "name": "theodo/sendgrid",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/theodo/sendgrid-php.git",
+                "reference": "22be1d55f9bc8fbebec087dc401af95888c9da11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/theodo/sendgrid-php/zipball/22be1d55f9bc8fbebec087dc401af95888c9da11",
+                "reference": "22be1d55f9bc8fbebec087dc401af95888c9da11",
+                "shasum": ""
+            },
+            "require": {
+                "mashape/unirest-php": "dev-master",
+                "php": ">=5.3",
+                "sendgrid/smtpapi": "0.0.1"
+            },
+            "replace": {
+                "sendgrid/sendgrid-php": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "vlucas/phpdotenv": "1.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SendGrid": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "This library allows you to quickly and easily send emails through SendGrid using PHP.",
+            "keywords": [
+                "SendGrid",
+                "email",
+                "grid",
+                "send",
+                "sendgrid"
+            ],
+            "support": {
+                "source": "https://github.com/theodo/sendgrid-php/tree/master"
+            },
+            "time": "2014-03-18 14:46:07"
         }
     ],
     "packages-dev": [
@@ -1205,9 +1207,9 @@
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "theodo/sendgrid": 20
+    },
     "platform": {
         "php": ">=5.3.2"
     },
