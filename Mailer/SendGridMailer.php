@@ -56,12 +56,14 @@ class SendGridMailer
      * @param $to
      * @param $subject
      * @param $html
+     * @param $attachments
      * @return bool
      */
-    public function sendEmail($from, $from_name, $to, $subject, $html)
+    public function sendEmail($from, $from_name, $to, $subject, $html, $attachments)
     {
         $options = compact('from', 'from_name', 'to', 'subject', 'html');
         $sendGridEmail = $this->sendGridEmailFactory->createFromParameters($options);
+        $sendGridEmail->setAttachments($attachments);
 
         return $this->sendSendGridEmail($sendGridEmail);
     }
