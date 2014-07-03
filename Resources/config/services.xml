@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="theodo_send_grid_mailer.mailer.class">Theodo\SendGridMailerBundle\Mailer\SendGridMailer</parameter>
+        <parameter key="theodo_send_grid_mailer.sender.listener.class">Theodo\SendGridMailerBundle\Mailer\SenderListener</parameter>
         <parameter key="theodo_send_grid_mailer.factory.class">Theodo\SendGridMailerBundle\Factory\SendGridEmailFactory</parameter>
     </parameters>
 
@@ -18,8 +19,12 @@
             <argument>%sendgrid.user_login%</argument>
             <argument>%sendgrid.user_password%</argument>
             <argument type="service" id="theodo_send_grid_mailer.factory" />
+            <argument type="service" id="filesystem" />
         </service>
-
+        <service id="theodo_send_grid_mailer.sender.listener" class="%theodo_send_grid_mailer.sender.listener.class%">
+            <argument type="service" id="theodo_send_grid_mailer.mailer" />
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 
 </container>

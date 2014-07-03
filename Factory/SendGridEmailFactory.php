@@ -7,6 +7,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
+ * class SendGridEmailFactory
+ *
  * @author Reynald Mandel <reynaldm@theodo.fr>
  */
 class SendGridEmailFactory
@@ -27,9 +29,11 @@ class SendGridEmailFactory
 
     /**
      * Generate a SendGridEmail object from an array of options
-     * @see setDefaultOptions method to know the constraints applied to $options
      *
      * @param array $options
+     *
+     * @see setDefaultOptions method to know the constraints applied to $options
+     *
      * @return Email
      */
     public function createFromParameters(array $options)
@@ -48,6 +52,9 @@ class SendGridEmailFactory
         return $email;
     }
 
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     protected function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired(array('from', 'to', 'subject', 'html'));

@@ -4,7 +4,8 @@ namespace Theodo\SendGridMailerBundle\Mailer;
 
 use SendGrid as SendGridService;
 use SendGrid\Email;
-
+use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Filesystem;
 use Theodo\SendGridMailerBundle\Factory\SendGridEmailFactory;
 
 /**
@@ -16,6 +17,11 @@ use Theodo\SendGridMailerBundle\Factory\SendGridEmailFactory;
 class SendGridMailer
 {
     /**
+     * @var array
+     */
+    protected $mails;
+
+    /**
      * @var SendGridService
      */
     protected $sendGridService;
@@ -26,14 +32,22 @@ class SendGridMailer
     protected $sendGridEmailFactory;
 
     /**
-     * @param string                $sendGridUserLogin     the send grid user's account login
-     * @param string                $sendGridUserPassword  the send grid user's account password
-     * @param SendGridEmailFactory  $sendGridEmailFactory  the factory to generate send grid specific emails
+     * @param string               $sendGridUserLogin    the send grid user's account login
+     * @param string               $sendGridUserPassword the send grid user's account password
+     * @param SendGridEmailFactory $sendGridEmailFactory the factory to generate send grid specific emails
+     * @param Filesystem           $filesystem           the filesystem service
      */
-    public function __construct($sendGridUserLogin, $sendGridUserPassword, SendGridEmailFactory $sendGridEmailFactory)
+    public function __construct(
+        $sendGridUserLogin,
+        $sendGridUserPassword,
+        SendGridEmailFactory $sendGridEmailFactory,
+        Filesystem $filesystem
+    )
     {
         $this->sendGridService = new SendGridService($sendGridUserLogin, $sendGridUserPassword, array("turn_off_ssl_verification" => true));
         $this->sendGridEmailFactory = $sendGridEmailFactory;
+        $this->emails = array();
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -41,6 +55,7 @@ class SendGridMailer
      * Return true if the mail has been effectively sent, false otherwise
      *
      * @param Email $email
+     *
      * @return bool
      */
     public function sendSendGridEmail(Email $email)
@@ -51,20 +66,70 @@ class SendGridMailer
     }
 
     /**
-     * @param $from
-     * @param $from_name
-     * @param $to
-     * @param $subject
-     * @param $html
-     * @param $attachments
+     * @param string $from
+     * @param string $from_name
+     * @param string $to
+     * @param string $subject
+     * @param string $html
+     * @param array  $attachments
+     *
      * @return bool
      */
-    public function sendEmail($from, $from_name, $to, $subject, $html, $attachments)
+    public function addEmail($from, $from_name, $to, $subject, $html, $attachments)
     {
         $options = compact('from', 'from_name', 'to', 'subject', 'html');
         $sendGridEmail = $this->sendGridEmailFactory->createFromParameters($options);
         $sendGridEmail->setAttachments($attachments);
 
         return $this->sendSendGridEmail($sendGridEmail);
+    }
+
+    /**
+     * @param string  $from
+     * @param string  $from_name
+     * @param string  $to
+     * @param string  $subject
+     * @param string  $html
+     * @param array   $attachments
+     * @param boolean $removeAttachments
+     */
+    public function addEmailToSend($from, $from_name, $to, $subject, $html, $attachments, $removeAttachments = false)
+    {
+        $options = compact('from', 'from_name', 'to', 'subject', 'html');
+        $sendGridEmail = $this->sendGridEmailFactory->createFromParameters($options);
+        $sendGridEmail->setAttachments($attachments);
+
+        $this->emails[] = array($sendGridEmail, $removeAttachments);
+    }
+
+    /**
+     * send emails
+     */
+    public function sendEmails()
+    {
+        foreach ($this->emails as $datas) {
+            /** @var Email $email */
+            $email = $datas[0];
+            $this->sendGridService->send($email);
+
+            if ($datas[1]) {
+                $this->removeAttachments($email->getAttachments());
+            }
+        }
+    }
+
+    /**
+     * @param array $attachments
+     */
+    public function removeAttachments(array $attachments)
+    {
+        foreach ($attachments as $attachment) {
+            if ($this->filesystem->exists($attachment)) {
+                try {
+                    $this->filesystem->remove($attachment);
+                } catch (IOException $e) {
+                }
+            }
+        }
     }
 }
