@@ -1,5 +1,5 @@
 {
-    "name": "theodo/send-grid-mailer-bundle",
+    "name": "ourserverdev/send-grid-mailer-bundle",
     "description": "An opensource bundle that integrates SendGrid API to send emails via their mailing service",
     "license": "MIT",
     "authors": [
