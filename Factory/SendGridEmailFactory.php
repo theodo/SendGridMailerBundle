@@ -41,6 +41,11 @@ class SendGridEmailFactory
         $options = $this->resolver->resolve($options);
 
         $email = new Email();
+
+        /**
+         * Add replyTo header must be required (RFC 5322)
+         */
+        $email->setReplyTo($options['from']);
         $email->setFrom($options['from']);
         $email->setFromName($options['from_name']);
         $email->setSubject($options['subject']);
