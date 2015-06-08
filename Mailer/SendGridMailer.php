@@ -16,6 +16,10 @@ use Theodo\SendGridMailerBundle\Factory\SendGridEmailFactory;
  */
 class SendGridMailer
 {
+    const SUCCESS_KEY = 'message';
+
+    const SUCCESS_MESSAGE = 'success';
+
     /**
      * @var array
      */
@@ -62,7 +66,8 @@ class SendGridMailer
     {
         $response = $this->sendGridService->send($email);
 
-        return $response->message == 'success';
+        $response = $response->getBody();
+        return $response[self::SUCCESS_KEY] === self::SUCCESS_MESSAGE;
     }
 
     /**
