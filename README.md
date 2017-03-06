@@ -26,7 +26,15 @@ If your minimum-stability is "stable", instead of lowering it, you can directly 
 
 Then run :
 
+```
     composer update theodo/send-grid-mailer-bundle
+```
+
+Finally, add your bundle to the `app/AppKernel.php` file in the `registerBundles()` method:
+
+```
+    new Theodo\SendGridMailerBundle\TheodoSendGridMailerBundle(),
+```
 
 How to use it ?
 ===============
