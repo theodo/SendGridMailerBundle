@@ -32,7 +32,7 @@ How to use it ?
 ===============
 
 Sending mail is easy :
- - define "sendgrid.user_login" and "sendgrid.user_password" in your parameters.yml
+ - define "sendgrid_user_login" and "sendgrid_user_password" in your parameters.yml
  - get the "theodo_send_grid_mailer.mailer" service and use the "sendEmail" function
  - enjoy
 

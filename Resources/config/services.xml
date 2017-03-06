@@ -16,8 +16,8 @@
         </service>
 
         <service id="theodo_send_grid_mailer.mailer" class="%theodo_send_grid_mailer.mailer.class%">
-            <argument>%sendgrid.user_login%</argument>
-            <argument>%sendgrid.user_password%</argument>
+            <argument>%sendgrid_user_login%</argument>
+            <argument>%sendgrid_user_password%</argument>
             <argument type="service" id="theodo_send_grid_mailer.factory" />
             <argument type="service" id="filesystem" />
         </service>

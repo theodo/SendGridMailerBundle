@@ -24,13 +24,10 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->arrayNode('sendgrid')
-            ->children()
-            ->scalarNode('user_login')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('user_password')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('sendgrid_user_login')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('sendgrid_user_password')->isRequired()->cannotBeEmpty()->end()
             ->end()
             ->isRequired()
-            ->end()
             ->end();
 
         return $treeBuilder;
