@@ -26,13 +26,21 @@ If your minimum-stability is "stable", instead of lowering it, you can directly 
 
 Then run :
 
+```
     composer update theodo/send-grid-mailer-bundle
+```
+
+Finally, add your bundle to the `app/AppKernel.php` file in the `registerBundles()` method:
+
+```
+    new Theodo\SendGridMailerBundle\TheodoSendGridMailerBundle(),
+```
 
 How to use it ?
 ===============
 
 Sending mail is easy :
- - define "sendgrid.user_login" and "sendgrid.user_password" in your parameters.yml
+ - define "sendgrid_user_login" and "sendgrid_user_password" in your parameters.yml
  - get the "theodo_send_grid_mailer.mailer" service and use the "sendEmail" function
  - enjoy
 
