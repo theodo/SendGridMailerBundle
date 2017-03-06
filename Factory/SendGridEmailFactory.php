@@ -4,7 +4,6 @@ namespace Theodo\SendGridMailerBundle\Factory;
 
 use SendGrid\Email;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * class SendGridEmailFactory
@@ -53,11 +52,18 @@ class SendGridEmailFactory
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array('from', 'to', 'subject', 'html'));
-        $resolver->setOptional(array('from_name', 'reply_to', 'cc_list', 'bcc_list', 'headers', 'attachments'));
+        $resolver->setDefaults(array(
+            'from_name'   => null,
+            'reply_to'    => null,
+            'cc_list'     => null,
+            'bcc_list'    => null,
+            'headers'     => null,
+            'attachments' => null
+        ));
     }
 }
